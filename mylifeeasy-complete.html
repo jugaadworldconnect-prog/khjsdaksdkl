@@ -1,0 +1,1965 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MyLifeEasy - Your Complete Life Ecosystem</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #667eea;
+            --secondary: #764ba2;
+            --accent: #f093fb;
+            --dark: #2d3748;
+            --light: #f8f9fa;
+            --success: #48bb78;
+            --warning: #ed8936;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            overflow-x: hidden;
+        }
+
+        /* Page Container */
+        .page {
+            display: none;
+            animation: fadeIn 0.5s ease-in;
+        }
+
+        .page.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Header & Navigation */
+        header {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .logo-icon {
+            font-size: 2.5rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .nav-links a:hover {
+            transform: translateY(-2px);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: white;
+            transition: width 0.3s;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .cta-btn {
+            background: white;
+            color: var(--primary);
+            padding: 0.8rem 1.8rem;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            cursor: pointer;
+            border: 2px solid white;
+        }
+
+        .cta-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,255,255,0.3);
+        }
+
+        .mobile-menu {
+            display: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 180px 2rem 120px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(255,255,255,0.1) 0%, transparent 50%);
+        }
+
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-text h1 {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: slideInLeft 1s ease-out;
+        }
+
+        .hero-text p {
+            font-size: 1.4rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            animation: slideInLeft 1s 0.2s ease-out backwards;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1.5rem;
+            animation: slideInLeft 1s 0.4s ease-out backwards;
+        }
+
+        .btn-primary, .btn-secondary {
+            padding: 1.2rem 2.5rem;
+            border-radius: 35px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: white;
+            color: var(--primary);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+
+        .hero-visual {
+            animation: slideInRight 1s ease-out;
+        }
+
+        .hero-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            margin-bottom: 1rem;
+        }
+
+        .hero-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        @keyframes slideInLeft {
+            from { opacity: 0; transform: translateX(-50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        @keyframes slideInRight {
+            from { opacity: 0; transform: translateX(50px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* Trust Badges */
+        .trust-section {
+            background: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 -5px 20px rgba(0,0,0,0.05);
+        }
+
+        .trust-badges {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        .trust-badge {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .trust-badge-icon {
+            font-size: 2.5rem;
+        }
+
+        .trust-badge-text h4 {
+            color: var(--primary);
+            font-size: 1.1rem;
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 2rem;
+            background: var(--light);
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 4rem;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            transition: all 0.4s;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transform: scaleX(0);
+            transition: transform 0.4s;
+        }
+
+        .feature-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .feature-card:hover {
+            transform: translateY(-15px);
+            box-shadow: 0 20px 50px rgba(102,126,234,0.25);
+        }
+
+        .feature-icon {
+            font-size: 4rem;
+            margin-bottom: 1.5rem;
+            display: inline-block;
+            transition: transform 0.4s;
+        }
+
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .feature-card h3 {
+            color: var(--primary);
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Stats Section */
+        .stats {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 80px 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><circle cx="50" cy="50" r="3" fill="rgba(255,255,255,0.1)"/></svg>');
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-item {
+            text-align: center;
+            padding: 2rem;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s;
+        }
+
+        .stat-item:hover {
+            transform: translateY(-10px);
+            background: rgba(255,255,255,0.2);
+        }
+
+        .stat-item h3 {
+            font-size: 3.5rem;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .stat-item p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* Services Page */
+        .services-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 150px 2rem 80px;
+            text-align: center;
+        }
+
+        .services-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .services-categories {
+            padding: 80px 2rem;
+        }
+
+        .service-category {
+            margin-bottom: 5rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .category-icon {
+            font-size: 3rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .category-header h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .service-card:hover {
+            border-color: var(--primary);
+            transform: translateY(-8px);
+            box-shadow: 0 15px 40px rgba(102,126,234,0.2);
+        }
+
+        .service-card h4 {
+            color: var(--primary);
+            font-size: 1.3rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .service-card p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .service-features {
+            list-style: none;
+            margin-top: 1rem;
+        }
+
+        .service-features li {
+            padding: 0.4rem 0;
+            color: #555;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .service-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+        }
+
+        /* Pricing Page */
+        .pricing-hero {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+            padding: 150px 2rem 80px;
+            text-align: center;
+        }
+
+        .pricing-section {
+            padding: 80px 2rem;
+            background: var(--light);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+
+        .pricing-card {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            transition: all 0.4s;
+            position: relative;
+        }
+
+        .pricing-card.featured {
+            border: 3px solid var(--primary);
+            transform: scale(1.05);
+        }
+
+        .pricing-card.featured::before {
+            content: 'MOST POPULAR';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 0.5rem 2rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+        }
+
+        .pricing-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 60px rgba(102,126,234,0.25);
+        }
+
+        .pricing-header h3 {
+            font-size: 2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .price span {
+            font-size: 1.2rem;
+            color: #666;
+        }
+
+        .pricing-features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .pricing-features li {
+            padding: 1rem 0;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .pricing-features li::before {
+            content: '✓';
+            color: var(--success);
+            font-weight: bold;
+            font-size: 1.3rem;
+        }
+
+        .pricing-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .pricing-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+        }
+
+        /* About Page */
+        .about-section {
+            padding: 80px 2rem;
+        }
+
+        .about-content {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .about-content h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            margin: 3rem 0 1.5rem;
+        }
+
+        .about-content p {
+            font-size: 1.2rem;
+            line-height: 1.8;
+            color: #555;
+            margin-bottom: 1.5rem;
+        }
+
+        .vision-mission {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 3rem;
+            margin: 4rem 0;
+        }
+
+        .vm-card {
+            background: linear-gradient(135deg, rgba(102,126,234,0.1), rgba(118,75,162,0.1));
+            padding: 3rem;
+            border-radius: 20px;
+            border-left: 5px solid var(--primary);
+        }
+
+        .vm-card h3 {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        /* Contact Page */
+        .contact-section {
+            padding: 80px 2rem;
+            background: var(--light);
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            max-width: 1200px;
+            margin: 3rem auto;
+        }
+
+        .contact-info {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            background: var(--light);
+            border-radius: 10px;
+        }
+
+        .contact-item-icon {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border: none;
+            border-radius: 30px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 30px rgba(102,126,234,0.4);
+        }
+
+        /* FAQ Section */
+        .faq-section {
+            padding: 80px 2rem;
+        }
+
+        .faq-item {
+            background: white;
+            margin-bottom: 1.5rem;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .faq-question {
+            padding: 1.5rem 2rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: var(--light);
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            background: rgba(102,126,234,0.1);
+        }
+
+        .faq-question h4 {
+            color: var(--dark);
+            font-size: 1.2rem;
+        }
+
+        .faq-toggle {
+            font-size: 1.5rem;
+            color: var(--primary);
+            transition: transform 0.3s;
+        }
+
+        .faq-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+            padding: 0 2rem;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 1.5rem 2rem;
+        }
+
+        .faq-item.active .faq-toggle {
+            transform: rotate(45deg);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: white;
+            padding: 60px 2rem 20px;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto 3rem;
+        }
+
+        .footer-section h4 {
+            margin-bottom: 1.5rem;
+            color: var(--accent);
+            font-size: 1.3rem;
+        }
+
+        .footer-section p {
+            color: #ccc;
+            line-height: 1.8;
+        }
+
+        .footer-section ul {
+            list-style: none;
+        }
+
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.8rem;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-link {
+            width: 45px;
+            height: 45px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+        }
+
+        .social-link:hover {
+            background: var(--primary);
+            transform: translateY(-5px);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #444;
+            color: #999;
+        }
+
+        /* Calculator */
+        .calculator-section {
+            background: white;
+            padding: 4rem;
+            border-radius: 20px;
+            max-width: 800px;
+            margin: 4rem auto;
+            box-shadow: 0 15px 50px rgba(0,0,0,0.1);
+        }
+
+        .calculator-inputs {
+            display: grid;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .calc-result {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 3rem;
+            border-radius: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        .calc-result.show {
+            display: block;
+            animation: slideInUp 0.5s ease-out;
+        }
+
+        @keyframes slideInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .calc-result h3 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .hero-text h1 {
+                font-size: 3rem;
+            }
+
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .vision-mission {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: block;
+            }
+
+            .hero-text h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero-text p {
+                font-size: 1.1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .pricing-grid,
+            .features-grid,
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .calculator-section {
+                padding: 2rem;
+            }
+        }
+
+        /* Loading Animation */
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo" onclick="showPage('home')">
+                <span class="logo-icon">🌟</span>
+                <span>MyLifeEasy</span>
+            </div>
+            <ul class="nav-links">
+                <li><a onclick="showPage('home')">Home</a></li>
+                <li><a onclick="showPage('services')">Services</a></li>
+                <li><a onclick="showPage('pricing')">Pricing</a></li>
+                <li><a onclick="showPage('about')">About</a></li>
+                <li><a onclick="showPage('contact')">Contact</a></li>
+            </ul>
+            <a class="cta-btn" onclick="showPage('contact')">Get Started</a>
+            <div class="mobile-menu">☰</div>
+        </nav>
+    </header>
+
+    <!-- HOME PAGE -->
+    <div id="home" class="page active">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>Your Complete Life Ecosystem</h1>
+                    <p>Everything students and professionals need to thrive in a new city - from accommodation to career growth, all powered by AI.</p>
+                    <div class="hero-buttons">
+                        <a class="btn-primary" onclick="showPage('services')">Explore Services</a>
+                        <a class="btn-secondary" onclick="showPage('pricing')">View Pricing</a>
+                    </div>
+                </div>
+                <div class="hero-visual">
+                    <div class="hero-card">
+                        <h3>🏠 Find Your Perfect PG</h3>
+                        <p>Verified listings with zero brokerage</p>
+                    </div>
+                    <div class="hero-card">
+                        <h3>🎓 Grow Your Career</h3>
+                        <p>Access internships, jobs & skill courses</p>
+                    </div>
+                    <div class="hero-card">
+                        <h3>💰 Save Big Money</h3>
+                        <p>Up to ₹84,000 yearly savings</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Trust Badges -->
+        <section class="trust-section">
+            <div class="trust-badges">
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">✓</div>
+                    <div class="trust-badge-text">
+                        <h4>100% Verified</h4>
+                        <p>All providers checked</p>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">🔒</div>
+                    <div class="trust-badge-text">
+                        <h4>Secure Payments</h4>
+                        <p>Safe transactions</p>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">⚡</div>
+                    <div class="trust-badge-text">
+                        <h4>Instant Support</h4>
+                        <p>24/7 AI assistance</p>
+                    </div>
+                </div>
+                <div class="trust-badge">
+                    <div class="trust-badge-icon">💸</div>
+                    <div class="trust-badge-text">
+                        <h4>Best Prices</h4>
+                        <p>Save up to 40%</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats">
+            <div class="container">
+                <h2 class="section-title" style="color: white; margin-bottom: 3rem;">Making Life Easier for Millions</h2>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <h3>35 Cr+</h3>
+                        <p>Students in India</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>₹84,000</h3>
+                        <p>Average Yearly Savings</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>1.2 Cr+</h3>
+                        <p>Move to New Cities Yearly</p>
+                    </div>
+                    <div class="stat-item">
+                        <h3>₹80K Cr</h3>
+                        <p>PG Market Size</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Everything You Need in One Platform</h2>
+                <p class="section-subtitle">A complete ecosystem designed to simplify your life</p>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🏠</div>
+                        <h3>PG/Hostel Finder</h3>
+                        <p>Find your perfect accommodation with verified listings, real reviews, transparent pricing, and zero brokerage fees. Our AI matches you with the best options based on your location, budget, and lifestyle preferences.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🍱</div>
+                        <h3>Daily Living Services</h3>
+                        <p>Access trusted food delivery, tiffin services, clean water supply, professional laundry and cleaning services, and reliable repair services for all your daily needs - all in one place.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h3>Learning & Growth</h3>
+                        <p>Exchange, rent, or buy books at affordable prices. Access online tutoring, doubt-solving sessions, skill development courses, and career coaching to accelerate your growth.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">💼</div>
+                        <h3>Internships & Jobs</h3>
+                        <p>Discover verified internship and job opportunities tailored to your profile. Connect with top recruiters and build your career with confidence through our dedicated portal.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🤖</div>
+                        <h3>AI-Powered Intelligence</h3>
+                        <p>Get 24/7 support from our AI chatbot, receive personalized recommendations, plan your budget smartly, and stay safe with intelligent safety alerts powered by advanced AI.</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🚴</div>
+                        <h3>Lifestyle & Utility</h3>
+                        <p>Rent vehicles (cycles, bikes, e-scooters), discover city events and student meetups, enjoy exclusive vouchers and partnerships, and connect with your community.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Savings Calculator -->
+        <section class="features">
+            <div class="container">
+                <h2 class="section-title">Calculate Your Savings</h2>
+                <p class="section-subtitle">See how much you can save with MyLifeEasy</p>
+                <div class="calculator-section">
+                    <div class="calculator-inputs">
+                        <div class="form-group">
+                            <label for="userType">I am a:</label>
+                            <select id="userType">
+                                <option value="">Select your category</option>
+                                <option value="student">Student</option>
+                                <option value="professional">Working Professional</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="city">City:</label>
+                            <select id="city">
+                                <option value="">Select city</option>
+                                <option value="metro">Metro City (Delhi, Mumbai, Bangalore)</option>
+                                <option value="tier1">Tier 1 City (Pune, Hyderabad, Chennai)</option>
+                                <option value="tier2">Tier 2 City (Jaipur, Lucknow, Indore)</option>
+                            </select>
+                        </div>
+                        <button class="pricing-btn" onclick="calculateSavings()">Calculate My Savings</button>
+                    </div>
+                    <div id="savingsResult" class="calc-result">
+                        <h3 id="savingsAmount">₹0</h3>
+                        <p id="savingsText" style="font-size: 1.3rem; margin-bottom: 1rem;">Your Estimated Yearly Savings</p>
+                        <p style="font-size: 1rem; opacity: 0.9;">Join thousands who are already saving with MyLifeEasy!</p>
+                        <button class="btn-primary" style="margin-top: 2rem; padding: 1rem 2rem;" onclick="showPage('contact')">Start Saving Now</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="stats">
+            <div class="container" style="text-align: center;">
+                <h2 style="font-size: 3rem; margin-bottom: 1rem; color: white;">Ready to Make Life Easy?</h2>
+                <p style="font-size: 1.4rem; margin-bottom: 2rem; color: white; opacity: 0.95;">Join India's first complete life ecosystem today and start saving</p>
+                <button class="btn-primary" style="padding: 1.2rem 3rem; font-size: 1.2rem; cursor: pointer;" onclick="showPage('contact')">Get Started Now</button>
+            </div>
+        </section>
+    </div>
+
+    <!-- SERVICES PAGE -->
+    <div id="services" class="page">
+        <section class="services-hero">
+            <h1>Our Services</h1>
+            <p style="font-size: 1.3rem; margin-top: 1rem;">Everything you need to live, learn, and grow</p>
+        </section>
+
+        <section class="services-categories">
+            <div class="container">
+                <!-- Accommodation -->
+                <div class="service-category">
+                    <div class="category-header">
+                        <span class="category-icon">🏠</span>
+                        <h2>Accommodation Services</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h4>PG Finder</h4>
+                            <p>Find verified PG accommodations with transparent pricing and zero brokerage fees</p>
+                            <ul class="service-features">
+                                <li>Verified listings only</li>
+                                <li>Real reviews & ratings</li>
+                                <li>Virtual tours available</li>
+                                <li>AI-powered matching</li>
+                                <li>No hidden charges</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Hostel Booking</h4>
+                            <p>Book hostel rooms with complete amenity information and fair pricing</p>
+                            <ul class="service-features">
+                                <li>Single & shared rooms</li>
+                                <li>Meal options included</li>
+                                <li>Safety-certified properties</li>
+                                <li>Flexible payment plans</li>
+                                <li>Quick onboarding</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Roommate Matching</h4>
+                            <p>Find compatible roommates based on lifestyle and preferences</p>
+                            <ul class="service-features">
+                                <li>Personality matching</li>
+                                <li>Verified profiles</li>
+                                <li>Chat before deciding</li>
+                                <li>Safety screening</li>
+                                <li>Privacy protected</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Daily Services -->
+                <div class="service-category">
+                    <div class="category-header">
+                        <span class="category-icon">🍽️</span>
+                        <h2>Daily Living Services</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h4>Food & Tiffin Services</h4>
+                            <p>Healthy, affordable meal plans delivered to your doorstep</p>
+                            <ul class="service-features">
+                                <li>Home-cooked quality</li>
+                                <li>Customizable menus</li>
+                                <li>Dietary preferences</li>
+                                <li>Subscription plans</li>
+                                <li>Hygiene certified</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Water Delivery</h4>
+                            <p>Clean, safe drinking water delivered on schedule</p>
+                            <ul class="service-features">
+                                <li>RO purified water</li>
+                                <li>Regular delivery</li>
+                                <li>Subscription discounts</li>
+                                <li>Quality tested</li>
+                                <li>Emergency supply</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Laundry & Cleaning</h4>
+                            <p>Professional cleaning services for clothes and living spaces</p>
+                            <ul class="service-features">
+                                <li>Pickup & delivery</li>
+                                <li>Dry cleaning available</li>
+                                <li>Room cleaning service</li>
+                                <li>Eco-friendly products</li>
+                                <li>Same-day options</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Repair Services</h4>
+                            <p>Quick fixes for mobile, laptop, cycle, electrical, and plumbing issues</p>
+                            <ul class="service-features">
+                                <li>Expert technicians</li>
+                                <li>Transparent pricing</li>
+                                <li>Quick response time</li>
+                                <li>Warranty on repairs</li>
+                                <li>Emergency support</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Education & Career -->
+                <div class="service-category">
+                    <div class="category-header">
+                        <span class="category-icon">🎓</span>
+                        <h2>Education & Career Growth</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h4>Book Exchange</h4>
+                            <p>Buy, sell, or rent textbooks and study materials at affordable prices</p>
+                            <ul class="service-features">
+                                <li>Up to 70% off new prices</li>
+                                <li>Wide selection</li>
+                                <li>Quality guaranteed</li>
+                                <li>Easy returns</li>
+                                <li>Semester rentals</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Online Tutoring</h4>
+                            <p>Expert tutors for all subjects and competitive exams</p>
+                            <ul class="service-features">
+                                <li>One-on-one sessions</li>
+                                <li>Doubt solving</li>
+                                <li>Flexible timings</li>
+                                <li>Recorded sessions</li>
+                                <li>Affordable rates</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Skill Courses</h4>
+                            <p>Learn in-demand skills with certified online courses</p>
+                            <ul class="service-features">
+                                <li>Industry-recognized certs</li>
+                                <li>Project-based learning</li>
+                                <li>Expert instructors</li>
+                                <li>Lifetime access</li>
+                                <li>Job assistance</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Internship Portal</h4>
+                            <p>Find verified internships matching your skills and interests</p>
+                            <ul class="service-features">
+                                <li>Verified companies</li>
+                                <li>Stipend information</li>
+                                <li>Remote options</li>
+                                <li>Application tracking</li>
+                                <li>Resume building</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Job Platform</h4>
+                            <p>Connect with top employers and land your dream job</p>
+                            <ul class="service-features">
+                                <li>Curated opportunities</li>
+                                <li>Direct employer contact</li>
+                                <li>Interview prep</li>
+                                <li>Salary insights</li>
+                                <li>Career counseling</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Career Coaching</h4>
+                            <p>Personalized guidance to accelerate your career growth</p>
+                            <ul class="service-features">
+                                <li>Expert mentors</li>
+                                <li>Goal planning</li>
+                                <li>Skill assessment</li>
+                                <li>Industry insights</li>
+                                <li>Regular follow-ups</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Lifestyle -->
+                <div class="service-category">
+                    <div class="category-header">
+                        <span class="category-icon">🚴</span>
+                        <h2>Lifestyle & Transportation</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h4>Vehicle Rental</h4>
+                            <p>Rent cycles, bikes, and e-scooters for convenient city travel</p>
+                            <ul class="service-features">
+                                <li>Hourly/daily/monthly</li>
+                                <li>Well-maintained vehicles</li>
+                                <li>Helmet included</li>
+                                <li>Insurance covered</li>
+                                <li>Easy booking</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>City Events</h4>
+                            <p>Discover and join events, meetups, and networking opportunities</p>
+                            <ul class="service-features">
+                                <li>Student meetups</li>
+                                <li>Professional networking</li>
+                                <li>Cultural events</li>
+                                <li>Workshops & seminars</li>
+                                <li>Group activities</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Local Store Directory</h4>
+                            <p>Find nearby stores with exclusive discounts and offers</p>
+                            <ul class="service-features">
+                                <li>Verified vendors</li>
+                                <li>Special student discounts</li>
+                                <li>Location-based search</li>
+                                <li>Ratings & reviews</li>
+                                <li>Direct contact</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- AI Services -->
+                <div class="service-category">
+                    <div class="category-header">
+                        <span class="category-icon">🤖</span>
+                        <h2>AI-Powered Features</h2>
+                    </div>
+                    <div class="services-grid">
+                        <div class="service-card">
+                            <h4>24/7 AI Chatbot</h4>
+                            <p>Instant answers to all your questions, anytime</p>
+                            <ul class="service-features">
+                                <li>Always available</li>
+                                <li>Multi-language support</li>
+                                <li>Context-aware responses</li>
+                                <li>Service recommendations</li>
+                                <li>Quick problem solving</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>AI Recommendations</h4>
+                            <p>Personalized suggestions for PGs, courses, food, and more</p>
+                            <ul class="service-features">
+                                <li>Learns your preferences</li>
+                                <li>Smart matching</li>
+                                <li>Cost optimization</li>
+                                <li>Quality prioritization</li>
+                                <li>Regular updates</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Budget Planner</h4>
+                            <p>AI-powered tool to manage and optimize your expenses</p>
+                            <ul class="service-features">
+                                <li>Expense tracking</li>
+                                <li>Saving goals</li>
+                                <li>Smart alerts</li>
+                                <li>Budget reports</li>
+                                <li>Money-saving tips</li>
+                            </ul>
+                        </div>
+                        <div class="service-card">
+                            <h4>Safety Alerts</h4>
+                            <p>Intelligent alerts to keep you safe and informed</p>
+                            <ul class="service-features">
+                                <li>Location-based safety</li>
+                                <li>Emergency contacts</li>
+                                <li>SOS feature</li>
+                                <li>Area insights</li>
+                                <li>Real-time notifications</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- PRICING PAGE -->
+    <div id="pricing" class="page">
+        <section class="pricing-hero">
+            <h1>Simple, Transparent Pricing</h1>
+            <p style="font-size: 1.3rem; margin-top: 1rem;">Choose the plan that works best for you</p>
+        </section>
+
+        <section class="pricing-section">
+            <div class="container">
+                <div class="pricing-grid">
+                    <!-- Free Plan -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>Basic</h3>
+                            <div class="price">Free<span></span></div>
+                            <p>Perfect for getting started</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>Browse PG/Hostel listings</li>
+                            <li>Access to basic services</li>
+                            <li>Community features</li>
+                            <li>Limited AI support</li>
+                            <li>Standard customer support</li>
+                        </ul>
+                        <button class="pricing-btn" onclick="showPage('contact')">Get Started</button>
+                    </div>
+
+                    <!-- Prime Plan -->
+                    <div class="pricing-card featured">
+                        <div class="pricing-header">
+                            <h3>MyLifeEasy PRIME</h3>
+                            <div class="price">₹999<span>/year</span></div>
+                            <p>Most popular - Best value!</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>All Basic features</li>
+                            <li>15% discount on all services</li>
+                            <li>Free AI mentorship sessions</li>
+                            <li>1 free cleaning/repair per month</li>
+                            <li>Priority booking</li>
+                            <li>Exclusive event access</li>
+                            <li>24/7 priority support</li>
+                            <li>Budget planning tools</li>
+                            <li>Early access to new features</li>
+                        </ul>
+                        <button class="pricing-btn" onclick="showPage('contact')">Start Saving Now</button>
+                    </div>
+
+                    <!-- Service Provider -->
+                    <div class="pricing-card">
+                        <div class="pricing-header">
+                            <h3>For Businesses</h3>
+                            <div class="price">Custom</div>
+                            <p>For PG owners & service providers</p>
+                        </div>
+                        <ul class="pricing-features">
+                            <li>List your services/PG</li>
+                            <li>Verified business badge</li>
+                            <li>Featured listings</li>
+                            <li>Analytics dashboard</li>
+                            <li>Customer management tools</li>
+                            <li>Marketing support</li>
+                            <li>Payment integration</li>
+                            <li>Dedicated account manager</li>
+                        </ul>
+                        <button class="pricing-btn" onclick="showPage('contact')">Contact Sales</button>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: white; border-radius: 20px;">
+                    <h2 style="margin-bottom: 1rem;">How Much Can You Save?</h2>
+                    <p style="font-size: 1.2rem; color: #666; margin-bottom: 2rem;">MyLifeEasy PRIME members save an average of ₹15,000 - ₹25,000 annually on services</p>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 2rem; max-width: 800px; margin: 0 auto;">
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">₹2,000</h3>
+                            <p style="color: #666;">Saved on accommodation (no brokerage)</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">₹8,000</h3>
+                            <p style="color: #666;">Saved on food & daily services</p>
+                        </div>
+                        <div>
+                            <h3 style="font-size: 2.5rem; color: var(--primary); margin-bottom: 0.5rem;">₹5,000</h3>
+                            <p style="color: #666;">Saved on books & courses</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- FAQ Section -->
+        <section class="faq-section">
+            <div class="container">
+                <h2 class="section-title">Frequently Asked Questions</h2>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>How does MyLifeEasy PRIME work?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>MyLifeEasy PRIME is an annual subscription that gives you exclusive discounts, priority access, and premium features across all our services. Pay once and save throughout the year on accommodation, food, repairs, courses, and more. Most users recover their subscription cost within the first month!</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>Can I try before I buy?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Start with our free Basic plan to explore the platform. You can upgrade to PRIME anytime to unlock discounts and premium features. We also offer a 30-day money-back guarantee on PRIME subscriptions.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>Are all service providers verified?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Absolutely! Every PG owner, service provider, and business on our platform goes through a strict verification process. We check credentials, visit properties, verify licenses, and collect genuine reviews to ensure you get safe, quality services.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>How do payments work?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We use secure payment gateways for all transactions. You can pay via UPI, cards, net banking, or wallets. For services, you can choose to pay directly to providers or through our platform with added buyer protection.</p>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <h4>What if I'm not satisfied with a service?</h4>
+                        <span class="faq-toggle">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Your satisfaction is our priority. If you're not happy with any service, contact our support team within 24 hours. We'll work with the provider to resolve the issue or provide alternatives. PRIME members get priority resolution.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ABOUT PAGE -->
+    <div id="about" class="page">
+        <section class="services-hero">
+            <h1>About MyLifeEasy</h1>
+            <p style="font-size: 1.3rem; margin-top: 1rem;">Building India's first complete life ecosystem</p>
+        </section>
+
+        <section class="about-section">
+            <div class="about-content">
+                <h2>Our Story</h2>
+                <p>Every year, millions of students and working professionals move to new cities, chasing dreams of education and career growth. But the excitement of new opportunities quickly gives way to the stress of finding accommodation, managing daily needs, and navigating an unfamiliar city.</p>
+                
+                <p>We saw friends struggle with unreliable PG owners, expensive food delivery, difficult access to basic services, and the overwhelming challenge of managing it all. That's when we realized - people don't need more apps, they need one complete ecosystem that truly understands and solves their daily challenges.</p>
+
+                <p>MyLifeEasy was born from this insight. We're not just another booking platform or service marketplace. We're building a comprehensive life management ecosystem that brings together everything you need to thrive in a new city - from finding the perfect accommodation to advancing your career, all powered by intelligent AI that learns and adapts to your needs.</p>
+
+                <h2>The Problem We're Solving</h2>
+                <p>Today's students and professionals face fragmented solutions. They juggle multiple apps for different needs, waste time comparing options across platforms, pay high fees to middlemen and brokers, struggle to verify service quality and safety, and feel isolated without proper community support.</p>
+
+                <p>This fragmentation doesn't just waste time and money - it creates stress, reduces productivity, and prevents people from fully enjoying their new city experience. We believe life should be easier than this.</p>
+
+                <div class="vision-mission">
+                    <div class="vm-card">
+                        <h3>Our Vision</h3>
+                        <p>To build India's first complete life ecosystem that empowers students and professionals by simplifying daily living, promoting growth, and creating a trustworthy digital environment where everyone can thrive.</p>
+                    </div>
+                    <div class="vm-card">
+                        <h3>Our Mission</h3>
+                        <p>To make life easier through technology, AI, and seamless access to essential services - anytime, anywhere. We're committed to reducing stress, lowering costs, and building a supportive community for everyone navigating life in a new city.</p>
+                    </div>
+                </div>
+
+                <h2>What Makes Us Different</h2>
+                <p><strong>Complete Integration:</strong> Unlike platforms that focus on just one aspect of life, MyLifeEasy brings together accommodation, daily services, education, career growth, and lifestyle in one unified experience. No more app-hopping or account juggling.</p>
+
+                <p><strong>AI-Powered Intelligence:</strong> Our platform learns from your preferences and behavior to provide increasingly personalized recommendations. From finding the perfect PG to suggesting the right courses for your career goals, our AI works for you 24/7.</p>
+
+                <p><strong>Verified & Trusted Network:</strong> Every service provider on our platform is thoroughly verified. We personally visit properties, check credentials, verify licenses, and maintain ongoing quality monitoring to ensure your safety and satisfaction.</p>
+
+                <p><strong>Community-First Approach:</strong> We're not just connecting you to services - we're building a supportive community. Meet fellow students and professionals, discover city events, share experiences, and build meaningful connections.</p>
+
+                <p><strong>Genuine Savings:</strong> With zero brokerage fees, exclusive discounts, smart bundling, and our PRIME membership benefits, users save an average of ₹24,000 to ₹84,000 annually. That's money back in your pocket for what truly matters.</p>
+
+                <h2>Our Commitment</h2>
+                <p>We're committed to making life genuinely easier for millions of students and professionals across India. This means continuously improving our platform based on your feedback, expanding our verified service network to more cities, maintaining the highest standards of safety and quality, keeping our pricing transparent and fair, and investing in technology that truly serves your needs.</p>
+
+                <p>We measure our success not in downloads or transactions, but in the stress we eliminate, the money we help you save, and the opportunities we help you discover.</p>
+
+                <h2>Join Our Journey</h2>
+                <p>MyLifeEasy is more than a platform - it's a movement to transform how people experience life in new cities. Whether you're a student starting your college journey, a professional building your career, or a service provider looking to reach genuine customers, we invite you to join our growing ecosystem.</p>
+
+                <p>Together, we're building a future where moving to a new city is exciting rather than stressful, where finding quality services is simple rather than frustrating, and where everyone has the support they need to thrive.</p>
+
+                <div style="text-align: center; margin-top: 4rem; padding: 3rem; background: linear-gradient(135deg, var(--primary), var(--secondary)); border-radius: 20px; color: white;">
+                    <h2 style="color: white; margin-bottom: 1rem;">Ready to Experience the Difference?</h2>
+                    <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.95;">Join thousands who have already made their lives easier</p>
+                    <button class="btn-primary" style="cursor: pointer;" onclick="showPage('contact')">Get Started Today</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CONTACT PAGE -->
+    <div id="contact" class="page">
+        <section class="services-hero">
+            <h1>Get in Touch</h1>
+            <p style="font-size: 1.3rem; margin-top: 1rem;">We're here to help you make life easy</p>
+        </section>
+
+        <section class="contact-section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div class="contact-info">
+                        <h2 style="margin-bottom: 2rem;">Contact Information</h2>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📧</div>
+                            <div>
+                                <h4>Email</h4>
+                                <p>support@mylifeeasy.com</p>
+                                <p>business@mylifeeasy.com</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">📱</div>
+                            <div>
+                                <h4>Phone</h4>
+                                <p>+91 98765 43210</p>
+                                <p>Mon-Sat: 9 AM - 8 PM</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">💬</div>
+                            <div>
+                                <h4>Live Chat</h4>
+                                <p>24/7 AI Support Available</p>
+                                <p>Click the chat icon</p>
+                            </div>
+                        </div>
+                        <div class="contact-item">
+                            <div class="contact-item-icon">🏢</div>
+                            <div>
+                                <h4>Office</h4>
+                                <p>MyLifeEasy Technologies</p>
+                                <p>Bangalore, India</p>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 2rem;">
+                            <h4 style="margin-bottom: 1rem;">Follow Us</h4>
+                            <div class="social-links">
+                                <a href="#" class="social-link">📘</a>
+                                <a href="#" class="social-link">📷</a>
+                                <a href="#" class="social-link">🐦</a>
+                                <a href="#" class="social-link">💼</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="contact-form">
+                        <h2 style="margin-bottom: 2rem;">Send Us a Message</h2>
+                        <form id="contactForm" onsubmit="handleContactSubmit(event)">
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required placeholder="Enter your name">
+                            </div>
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required placeholder="your.email@example.com">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Phone Number</label>
+                                <input type="tel" id="phone" name="phone" placeholder="+91 98765 43210">
+                            </div>
+                            <div class="form-group">
+                                <label for="subject">Subject *</label>
+                                <select id="subject" name="subject" required>
+                                    <option value="">Select a subject</option>
+                                    <option value="general">General Inquiry</option>
+                                    <option value="pg">PG/Hostel Related</option>
+                                    <option value="services">Service Questions</option>
+                                    <option value="prime">MyLifeEasy PRIME</option>
+                                    <option value="business">Business Partnership</option>
+                                    <option value="support">Technical Support</option>
+                                    <option value="feedback">Feedback</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="message">Message *</label>
+                                <textarea id="message" name="message" required placeholder="Tell us how we can help you..."></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Send Message</button>
+                        </form>
+                        <div id="formSuccess" style="display: none; margin-top: 1rem; padding: 1rem; background: #d4edda; color: #155724; border-radius: 10px; text-align: center;">
+                            <strong>Thank you!</strong> We'll get back to you within 24 hours.
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 5rem; text-align: center; padding: 3rem; background: white; border-radius: 20px;">
+                    <h2 style="margin-bottom: 2rem;">For Service Providers & Businesses</h2>
+                    <p style="font-size: 1.1rem; color: #666; margin-bottom: 2rem;">Want to list your PG, offer services, or partner with us? We'd love to hear from you!</p>
+                    <div style="display: flex; gap: 2rem; justify-content: center; flex-wrap: wrap;">
+                        <div style="flex: 1; min-width: 250px; padding: 2rem; background: var(--light); border-radius: 15px;">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">List Your PG/Hostel</h4>
+                            <p style="color: #666; margin-bottom: 1rem;">Reach thousands of students and professionals looking for accommodation</p>
+                            <button class="pricing-btn" onclick="document.getElementById('subject').value='business'; document.getElementById('message').value='I want to list my PG/Hostel on MyLifeEasy';">Get Started</button>
+                        </div>
+                        <div style="flex: 1; min-width: 250px; padding: 2rem; background: var(--light); border-radius: 15px;">
+                            <h4 style="color: var(--primary); margin-bottom: 1rem;">Become a Service Partner</h4>
+                            <p style="color: #666; margin-bottom: 1rem;">Offer your services (food, repairs, tutoring, etc.) to our community</p>
+                            <button class="pricing-btn" onclick="document.getElementById('subject').value='business'; document.getElementById('message').value='I want to become a service partner';">Partner With Us</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-section">
+                <h4>MyLifeEasy</h4>
+                <p>Your complete life ecosystem for students and professionals. Making life easier, one service at a time.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link">📘</a>
+                    <a href="#" class="social-link">📷</a>
+                    <a href="#" class="social-link">🐦</a>
+                    <a href="#" class="social-link">💼</a>
+                </div>
+            </div>
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a onclick="showPage('home')">Home</a></li>
+                    <li><a onclick="showPage('services')">Services</a></li>
+                    <li><a onclick="showPage('pricing')">Pricing</a></li>
+                    <li><a onclick="showPage('about')">About Us</a></li>
+                    <li><a onclick="showPage('contact')">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Users</h4>
+                <ul>
+                    <li><a onclick="showPage('services')">Find PG/Hostel</a></li>
+                    <li><a onclick="showPage('services')">Browse Services</a></li>
+                    <li><a onclick="showPage('pricing')">MyLifeEasy PRIME</a></li>
+                    <li><a>Download App</a></li>
+                    <li><a>Help Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>For Providers</h4>
+                <ul>
+                    <li><a onclick="document.getElementById('subject').value='business'; showPage('contact');">List Your PG</a></li>
+                    <li><a onclick="document.getElementById('subject').value='business'; showPage('contact');">Become a Partner</a></li>
+                    <li><a onclick="showPage('pricing')">Business Solutions</a></li>
+                    <li><a onclick="showPage('contact')">Advertise With Us</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h4>Legal</h4>
+                <ul>
+                    <li><a>Privacy Policy</a></li>
+                    <li><a>Terms of Service</a></li>
+                    <li><a>Refund Policy</a></li>
+                    <li><a>Cookie Policy</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 MyLifeEasy Technologies. All rights reserved. Making life easier, one service at a time.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Page Navigation
+        function showPage(pageName) {
+            const pages = document.querySelectorAll('.page');
+            pages.forEach(page => page.classList.remove('active'));
+            document.getElementById(pageName).classList.add('active');
+            window.scrollTo({top: 0, behavior: 'smooth'});
+        }
+
+        // Savings Calculator
+        function calculateSavings() {
+            const userType = document.getElementById('userType').value;
+            const city = document.getElementById('city').value;
+            const result = document.getElementById('savingsResult');
+            const amount = document.getElementById('savingsAmount');
+            const text = document.getElementById('savingsText');
+
+            if (!userType || !city) {
+                alert('Please select both your category and city');
+                return;
+            }
+
+            let savings = { min: 0, max: 0 };
+
+            if (userType === 'student') {
+                if (city === 'metro') savings = { min: 24000, max: 84000 };
+                else if (city === 'tier1') savings = { min: 20000, max: 70000 };
+                else savings = { min: 15000, max: 55000 };
+            } else if (userType === 'professional') {
+                if (city === 'metro') savings = { min: 30000, max: 96000 };
+                else if (city === 'tier1') savings = { min: 25000, max: 80000 };
+                else savings = { min: 20000, max: 65000 };
+            }
+
+            amount.textContent = `₹${savings.min.toLocaleString('en-IN')} - ₹${savings.max.toLocaleString('en-IN')}`;
+            text.textContent = 'Your Estimated Yearly Savings';
+            result.classList.add('show');
+        }
+
+        // FAQ Toggle
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+
+        // Contact Form
+        function handleContactSubmit(event) {
+            event.preventDefault();
+            const form = document.getElementById('contactForm');
+            const success = document.getElementById('formSuccess');
+            
+            // Simulate form submission
+            setTimeout(() => {
+                form.style.display = 'none';
+                success.style.display = 'block';
+                setTimeout(() => {
+                    form.reset();
+                    form.style.display = 'block';
+                    success.style.display = 'none';
+                }, 5000);
+            }, 500);
+        }
+
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all feature cards and service cards
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.feature-card, .service-card, .pricing-card').forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html>
